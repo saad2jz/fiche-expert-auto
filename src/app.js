@@ -158,7 +158,7 @@ export function createApp({ llmService, accountService = null, mailService = nul
       "object-src 'none'",
       "img-src 'self' data: blob: https:",
       "connect-src 'self' https://fiche-expert-auto.onrender.com https://*.googleapis.com https://*.firebaseio.com https://*.firebasestorage.app https://*.googleusercontent.com",
-      "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdnjs.cloudflare.com",
+      "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://cdnjs.cloudflare.com",
       "style-src 'self' 'unsafe-inline'",
       "frame-src 'self' https://cardiag-f1ea7.firebaseapp.com https://accounts.google.com",
       "form-action 'self' https://accounts.google.com",

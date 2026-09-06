@@ -73,6 +73,13 @@ test('alternate browser hosts redirect to the canonical CarDiag domain without r
 
 test('Firebase authentication helper configuration stays available', async () => {
   const response = await fetch(`${baseUrl}/`);
+  // Firebase's popup/redirect resolver loads the GAPI iframe bridge dynamically.
+  // A working /__/auth/iframe alone is insufficient if this script is blocked.
+  const directives = new Map(response.headers.get('content-security-policy')
+    .split(';').map(part => part.trim().split(/\s+/)).map(([name, ...sources]) => [name, sources]));
+  assert.ok(directives.get('script-src').includes('https://apis.google.com'));
+  assert.ok(directives.get('script-src').includes('https://www.gstatic.com'));
+  assert.ok(!directives.get('script-src').includes('*'));
   assert.match(
     response.headers.get('content-security-policy'),
     /frame-src 'self' https:\/\/cardiag-f1ea7\.firebaseapp\.com https:\/\/accounts\.google\.com/,
